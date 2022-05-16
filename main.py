@@ -15,11 +15,13 @@ def dodgeV2(x, y):
 
 def download():
     img_id = list(msg.json.items())
-    img_id = dict(img_id[4][1][3])
+    img_id = dict(img_id[4][1][len(img_id[4][1])-1])
     img_id = list(img_id.items())
 
-    if not os.path.isdir(f"./DOWNLOADS/{str(msg.chat.id)}"):
-        os.makedirs(f"./DOWNLOADS/{str(msg.chat.id)}")
+    if not os.path.isdir(f"./DOWNLOADS"):
+        os.makedirs(f"./DOWNLOADS")    
+        if not os.path.isdir(f"./DOWNLOADS/{str(msg.chat.id)}"):
+            os.makedirs(f"./DOWNLOADS/{str(msg.chat.id)}")
 
     file_info = bot.get_file(img_id[0][1])
     downloaded_file = bot.download_file(file_info.file_path)
